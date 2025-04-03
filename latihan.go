@@ -1,23 +1,32 @@
 package main
-import "fmt"
+import (
+		"fmt"
+		"math"
+)
 
-func mtk(n int)int{
-	var hasil, i, o int
+func bilAlien(n int)int{
+	var basis, baris, i, hasil int
+	var j, k int
 	hasil = 0
-	for n >= 1{
-		i = n
-		o = 1
-		for i >= 1{
-			o*= i
-			i-= 1
-		}
-		hasil+= o
-		n-= 1
+	baris = n
+	for baris > 0{
+		baris = baris/10
+		basis++
+	}
+	basis = basis-1
+	for basis >= 0{
+		i = n%10
+		j = int(math.Pow(7, float64(basis)))
+		k = j*i
+		hasil = hasil+k
+		n = n/10
+		basis-=1
+		k = 1
 	}
 	return hasil
 }
 func main(){
 	var num int
 	fmt.Scan(&num)
-	fmt.Print(mtk(num))
+	fmt.Print(bilAlien(num))
 }
